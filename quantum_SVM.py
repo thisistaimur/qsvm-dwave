@@ -89,12 +89,11 @@ def dwave_run(path_data_key, path_in):
         print(f'running {pathsub} with {len(qubo_nodes)} nodes and {couplers} couplers')
 
         bqm = BinaryQuadraticModel.from_qubo(Q)
-        ordering = np.array(list(bqm.variables))   # ✅ FIX HERE
+        ordering = np.array(list(bqm.variables))  # ✅ extract variable labels properly
         if not (ordering == np.arange(len(ordering), dtype=ordering.dtype)).all():
             print(f'WARNING: variables are not correctly ordered! path={path} ordering={ordering}')
-
         try:
-            response = sampler.sample_qubo(Q, num_reads=10000)
+            response = sampler.sample_qubo(Q, num_reads=500)
         except ValueError:
             print(f' -- no embedding found, removing {pathsub} and trying fewer couplers')
             shutil.rmtree(pathsub)
