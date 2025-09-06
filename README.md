@@ -4,7 +4,7 @@
 
 This repo contains code for training and evaluating a Quantum Support Vector Machine (QSVM) using QUBO formulations and solving them on D-Wave quantum annealers (Pegasus topology) or hybrid solvers.
 
-For the implementation, see [qsvm.ipynb]("./qsvm.ipynb")
+For a binary QSVM implemenation see, [qsvm-binary.ipynb](./qsvm-binary.ipynb)
 
 ### Dataset
 
@@ -12,7 +12,7 @@ We use the Scikit-Learn's "digits" dataset that has 1797 images of hand written 
 
 ### Slides
 
-See our presentation slides for the JUNIQ/EPIC Summer School on Quantum Computing (2025) here --> [slides]("./JUNIQ-EPIC_slides.pdf")
+See our presentation slides for the JUNIQ/EPIC Summer School on Quantum Computing (2025) here --> [slides](./JUNIQ-EPIC_slides.pdf)
 
 ### Method
 
