@@ -12,7 +12,7 @@ We use the Scikit-Learn's "digits" dataset that has 1797 images of hand written 
 
 ### Slides
 
-See our presentation slides for the JUNIQ/EPIC Summer School on Quantum Computing (2025) here --> [slides]("./EPIC_slides.pdf")
+See our presentation slides for the JUNIQ/EPIC Summer School on Quantum Computing (2025) here --> [slides]("./JUNIQ-EPIC_slides.pdf")
 
 ### Method
 
