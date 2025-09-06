@@ -22,6 +22,10 @@ def gen_svm_qubos(B,K,xi,gamma,path_data_key,data_key,path_out):
          
     data,label = loaddataset(path_data_key+data_key)
 
+     # 🔍 Add this check here
+    print(f"[gen_svm_qubos] {data_key} unique labels:", np.unique(label))
+
+
     N = len(data)
 
     Q = np.zeros((K*N,K*N))
@@ -216,18 +220,35 @@ def eval_run_rocpr_curves(path_data_key,path_in,plotoption):
 
     for i in range(nalphas):
         alphas_n = alphas[i]
-        b = eval_offset_avg(alphas_n, data, label, gamma, C) # NOTE: this is NAN if no support vectors were found, see TODO file
+        b = eval_offset_avg(alphas_n, data, label, gamma, C)
+
+        # Skip invalid b
+        if np.isnan(b):
+            print(f"Skipping solution {i}: offset b is NaN (no support vectors).")
+            continue
+
         score = eval_classifier(data, alphas_n, data, label, gamma, b)
         scoretest = eval_classifier(datatest, alphas_n, data, label, gamma, b)
-        trainacc,trainauroc,trainauprc = eval_acc_auroc_auprc(label,score)
-        testacc,testauroc,testauprc = eval_acc_auroc_auprc(labeltest,scoretest)
-        
-        trainacc_all[i]=trainacc
-        trainauroc_all[i]=trainauroc
-        trainauprc_all[i]=trainauprc
-        testacc_all[i]=testacc
-        testauroc_all[i]=testauroc
-        testauprc_all[i]=testauprc
+
+        # Skip invalid scores
+        if np.any(np.isnan(score)) or np.any(np.isnan(scoretest)):
+            print(f"Skipping solution {i}: scores contain NaN.")
+            continue
+
+        # ✅ Now safe to evaluate
+        trainacc, trainauroc, trainauprc = eval_acc_auroc_auprc(label, score)
+        testacc, testauroc, testauprc = eval_acc_auroc_auprc(labeltest, scoretest)
+
+        trainacc_all[i] = trainacc
+        trainauroc_all[i] = trainauroc
+        trainauprc_all[i] = trainauprc
+        testacc_all[i] = testacc
+        testauroc_all[i] = testauroc
+        testauprc_all[i] = testauprc
+
+        print(f'{i}\t{(label*alphas_n).sum():8.4f}\t'
+              f'{trainacc:8.4f}\t{trainauroc:8.4f}\t{trainauprc:8.4f}\t'
+              f'{testacc:8.4f}\t{testauroc:8.4f}\t{testauprc:8.4f}')
 
         print(f'{i}\t{(label*alphas_n).sum():8.4f}\t{trainacc:8.4f}\t{trainauroc:8.4f}\t{trainauprc:8.4f}\t{testacc:8.4f}\t{testauroc:8.4f}\t{testauprc:8.4f}')
                    

@@ -1,0 +1,14 @@
+{
+    "problem_id": "f4aa474c-8b38-41cb-90f6-2458d6e838bb",
+    "timing": {
+        "post_processing_overhead_time": 35.0,
+        "qpu_access_overhead_time": 902.44,
+        "qpu_access_time": 102311.56,
+        "qpu_anneal_time_per_sample": 20.0,
+        "qpu_delay_time_per_sample": 20.58,
+        "qpu_programming_time": 15761.56,
+        "qpu_readout_time_per_sample": 132.52,
+        "qpu_sampling_time": 86550.0,
+        "total_post_processing_time": 35.0
+    }
+}

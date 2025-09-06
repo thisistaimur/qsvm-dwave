@@ -1,0 +1,14 @@
+{
+    "problem_id": "cab70015-8d01-40b9-b33d-4eb87bb10011",
+    "timing": {
+        "post_processing_overhead_time": 12.0,
+        "qpu_access_overhead_time": 15166.04,
+        "qpu_access_time": 150559.96,
+        "qpu_anneal_time_per_sample": 20.0,
+        "qpu_delay_time_per_sample": 20.58,
+        "qpu_programming_time": 15759.96,
+        "qpu_readout_time_per_sample": 229.02,
+        "qpu_sampling_time": 134800.0,
+        "total_post_processing_time": 12.0
+    }
+}
